@@ -32,6 +32,10 @@ return elements in Last In First Out order.
 #             self.size = len(self.storage)
 #             return popped
 
+
+
+
+##### Using a Linked List
 # from singly_linked_list import Node
 from singly_linked_list import LinkedList
 
