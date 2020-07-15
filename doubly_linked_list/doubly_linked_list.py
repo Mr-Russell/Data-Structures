@@ -42,6 +42,7 @@ class DoublyLinkedList:
     """
     def add_to_head(self, value):
         new_node = ListNode(value)
+        self.length += 1
 
         if self.head is None and self.tail is None:
             self.head = new_node
@@ -52,7 +53,6 @@ class DoublyLinkedList:
             self.head = new_node
             self.head.set_next(old_head)
             old_head.set_prev(self.head)
-            self.length += 1
 
         
     """
@@ -61,6 +61,8 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_head(self):
+        self.length -= 1
+
         # If List is empty
         if self.head is None and self.tail is None:
             return
@@ -70,14 +72,12 @@ class DoublyLinkedList:
             head = self.head
             self.head = None
             self.tail = None
-            self.length -= 1
             return head.get_value()
 
         else:
             val = self.head.get_next()
             self.head = self.head.get_next()
             self.head.set_prev(None)
-            self.length -= 1
             return val
             
     """
@@ -87,18 +87,18 @@ class DoublyLinkedList:
     """
     def add_to_tail(self, value):
         new_node = ListNode(value)
+        self.length += 1
         
         # If List is Empty
         if self.head is None and self.tail is None:
             self.head = new_node
             self.tail = new_node
-
+            
         else:
             old_tail = self.tail
             self.tail.set_next(new_node)
             self.tail = new_node
             self.tail.set_prev(old_tail)
-            self.length += 1
 
 
             
@@ -110,6 +110,13 @@ class DoublyLinkedList:
     def remove_from_tail(self):
         if self.head is None:
             return
+
+        elif self.head is self.tail:
+            val = self.tail.get_value()
+            self.head = None
+            self.tail = None
+            self.length -= 1
+            return val
         
         else:
             val = self.tail.get_value()
@@ -128,16 +135,19 @@ class DoublyLinkedList:
             self.head = node
 
         else:
-            previous_val = node.get_prev()
-            next_val = node.get_next()
-            old_head = self.head
+            value = node.value
+            self.delete(node)
+            self.add_to_head(value)
 
-            previous_val.set_next(next_val)
-            next_val.set_prev(previous_val)
-            node.set_prev(None)
-            node.set_next(old_head)
-            self.head = node
+            # previous_val = node.get_prev()
+            # next_val = node.get_next()
+            # old_head = self.head
 
+            # previous_val.set_next(next_val)
+            # next_val.set_prev(previous_val)
+            # node.set_prev(None)
+            # node.set_next(old_head)
+            # self.head = node
 
         
     """
@@ -147,16 +157,21 @@ class DoublyLinkedList:
     def move_to_end(self, node):
         if self.tail is None:
             self.tail = node
-        else:
-            previous_val = node.get_prev()
-            next_val = node.get_next()
-            old_tail = self.tail
 
-            previous_val.set_next(next_val)
-            next_val.set_prev(previous_val)
-            node.set_prev(old_tail)
-            node.set_next(None)
-            self.tail = node
+        else:
+            value = node.value
+            self.delete(node)
+            self.add_to_tail(value)
+
+            # previous_val = node.get_prev()
+            # next_val = node.get_next()
+            # old_tail = self.tail
+
+            # previous_val.next = next_val
+            # next_val.prev = previous_val
+            # node.set_prev(old_tail)
+            # node.set_next(None)
+            # self.tail = node
 
     """
     Deletes the input node from the List, preserving the 
@@ -164,15 +179,30 @@ class DoublyLinkedList:
     """
     def delete(self, node):
         if self.head is None and self.tail is None:
-            return
-        else:
-            previous_val = node.get_prev()
-            next_val = node.get_next()
+            return None
 
-            previous_val.set_next(next_val)
-            next_val.set_prev(previous_val)
-            node.set_prev(None)
-            node.set_next(None)
+        elif self.head is self.tail:
+            self.head = None
+            self.tail = None
+            self.length -= 1
+        
+        elif self.head is node:
+            node.next.set_prev(None)
+            self.head = node.next
+            self.length -= 1
+
+        elif self.tail is node:
+            node.prev.set_next(None)
+            self.tail = node.prev
+            self.length -= 1
+
+        else:
+            self.length -= 1
+            if node.prev:
+                node.prev.set_next(node.next)
+            if node.next:
+                node.next.set_prev(node.prev)
+        
 
     """
     Finds and returns the maximum value of all the nodes 
