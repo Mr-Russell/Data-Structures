@@ -4,29 +4,65 @@ Answer the following questions for each of the data structures you implemented a
 
 1. What is the runtime complexity of `push` using a list?
 
+    Constant because it does not require extra calculations based on length
+
+
 2. What is the runtime complexity of `push` using a linked list?
+
+    Constant because it does not require extra calculations based on length 
+
 
 3. What is the runtime complexity of `pop` using a list?
 
+    Constant because it does not require extra calculations based on length
+
+
 4. What is the runtime complexity of `pop` using a linked list?
+
+    Linear because the remove_tail method uses a while loop, which will take longer depending on the length of the current list
+
 
 5. What is the runtime complexity of `len` using a list?
 
+    Constant because it does not require extra calculations based on length
+
+
 6. What is the runtime complexity of `len` using a linked list?
+
+    Constant because it does not require extra calculations based on length. Though if you used a while loop it would be linear since the loop depends on the length of the current list
+
 
 ## Queue
 
 1. What is the runtime complexity of `enqueue` using a list?
 
+    Constant because it does not require extra calculations based on length
+
+
 2. What is the runtime complexity of `enqueue` using a linked list?
+
+    Constant because it does not require extra calculations based on length
+
 
 3. What is the runtime complexity of `dequeue` using a list?
 
+    Constant because it does not require extra calculations based on length
+
+
 4. What is the runtime complexity of `dequeue` using a linked list?
+
+    Constant because it does not require extra calculations based on length
+
 
 5. What is the runtime complexity of `len` using a list?
 
+    Constant because it does not require extra calculations based on length
+
+
 6. What is the runtime complexity of `len` using a linked list?
+
+    Constant because it does not require extra calculations based on length. Though if you used a while loop it would be linear since the loop depends on the length of the current list
+
 
 ## Doubly Linked List
 
