@@ -77,17 +77,46 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        if node.left is not None:
+            node.left.in_order_print(node.left)
+        print(node.value)
+        if node.right is not None:
+            node.right.in_order_print(node.right)
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        current = [node]
+
+        while len(current) > 0:
+            next_level = []
+            for item in current:
+                print(item.value)
+                if item.left is not None:
+                    next_level.append(item.left)
+                if item.right is not None:
+                    next_level.append(item.right)
+            
+            current = next_level
+                
+        
+        
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        items = [node]
+
+        while len(items) > 0:
+            current = items.pop()
+            print(current.value)
+
+            if current.left:
+                items.append(current.left)
+            if current.right:
+                items.append(current.right)
+
 
     # Stretch Goals -------------------------
     # Note: Research may be required
